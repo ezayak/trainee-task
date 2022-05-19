@@ -1,0 +1,26 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --clr-green: #5ECE7B;
+    --clr-black: #1D1F22;
+    --clr-white: #ffffff;
+    --clr-gray: #C4C4C4;
+    --clr-gray-selected: #EEEEEE;
+    --left: 7%;
+    --right: 7%;
+    --header-height: 80px;
+}
+
+.main-content {
+    position: absolute;
+    top: var(--header-height);
+    right: var(--right);
+    left: var(--left);
+    min-height: calc(100vh -  80px);
+    padding: 1.5rem 0;
+  
+}

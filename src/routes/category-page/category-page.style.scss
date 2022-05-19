@@ -1,0 +1,32 @@
+.category-header {
+    width: 299px;
+    height: 68px;
+    padding-top: 3%;
+    padding-bottom: 6%;
+    
+    /* Heading / Desktop / H2 */
+    
+    font-family: 'Raleway';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 42px;
+    line-height: 160%;
+    /* identical to box height, or 67px */
+    
+    display: flex;
+    align-items: center;
+    
+}
+
+.products-container {
+    --product-card-width: 386px;
+    --product-card-height: 444px;
+    --product-card-image-wdith: 354px;
+    --product-card-image-height: 330px;
+
+    padding: 0px;  
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(var(--product-card-width), 1fr));
+    gap: 1rem;   
+
+}

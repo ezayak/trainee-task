@@ -1,0 +1,102 @@
+.product-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 16px;
+    margin-bottom: 20px;
+    
+    width: var(--product-card-width);
+    height: var(--product-card-height);
+    
+}
+
+.product-card:hover {
+    box-shadow: 0px 4px 35px 0px #A8ACB030;
+    transform: scale(1.1);
+}
+
+.product-spacer {
+    min-width: 24px;
+    min-height: 24px;
+    
+    opacity: 0;
+}
+
+.product-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: var(--product-card-image-wdith);
+    padding: 0px;    
+}
+
+.product-title {
+    font-family: 'Raleway';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 18px;
+    line-height: 160%;
+}
+
+.product-image {
+    min-width: var(--product-card-image-wdith);
+    min-height: var(--product-card-image-height);   
+}
+
+.product-price {
+    font-family: 'Raleway';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 160%;
+    /* identical to box height, or 29px */
+
+    text-align: right;
+}
+
+.product-add-to-cart-button {
+    background-color: var(--clr-green);
+    border-radius: 50%;
+    border: 1px solid var(--clr-green);
+    padding: 18px;  
+    z-index: 10;
+    position: absolute;
+    right: 20px;
+    bottom: -30px;
+    animation-name: show-button;
+    animation-duration: 1s;
+}
+
+.product-add-to-cart-button:hover {
+    box-shadow: 0px 4px 35px 0px #A8ACB030;
+}
+
+.product-container {
+    position: relative;
+}
+
+.hide {
+    display: none;
+}
+
+.product-card:hover .hide {
+    display: block;
+}
+
+@keyframes show-button {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes zoom-on-hover {
+    0% {
+    }
+    100% {
+        transform: scale(1.1);
+    }
+}

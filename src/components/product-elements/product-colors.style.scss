@@ -1,0 +1,42 @@
+.colors {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 0px;
+    gap: 8px;
+}
+
+.color {
+    width: 20px;
+    height: 20px;
+    text-align: center;  
+}
+
+.active-color {
+    border: 1px solid var(--clr-green);
+}
+
+.color-header {
+    font-family: 'Raleway';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16px;  
+}
+
+.colors-container {
+    margin: 10px 0 10px 0;
+    gap: 8px;
+    display: flex;
+    flex-direction: column;
+}
+
+.color-container {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
