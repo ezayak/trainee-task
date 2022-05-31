@@ -1,38 +1,76 @@
 import './category-page.style.scss';
 import React from 'react';
-import { ProductCard } from '../../components/product-card/product-card.component';
-
-const products = [];
-
-for (let i = 0; i < 6; i++) { 
-    products.push({
-        id: i,
-        img: './Product Card/Elements/Image.png',
-        price: '50',
-        name: 'Appolo Running Short'
-    });
-}
-
+import ProductCard from '../../components/product-card/product-card.component';
+import Alert from '../../components/common/alert/alert.component';
+import { getProductListByCategory } from '../../utils/apis/products.api';
 
 class CategoryPage extends React.Component {
-    state = {
-        products: products,
-    };
+    constructor(props) { 
+        super(props);
+
+        this.state = {
+            products: [],
+            loading: true,
+            alertVisible: false,
+            message: '',
+            categoryName: props.name ? props.name : 'all'
+        };
+    }
+
+    loadProducts = (categoryName) => {
+        getProductListByCategory(categoryName)
+            .then(data => {
+                if (data) {
+                    this.setState({
+                        loading: false,
+                        products: data,
+                        categoryName
+                    });
+                }
+            });
+    }
+
+    componentDidMount() {
+        this.loadProducts(this.state.categoryName);
+    }
+
+    componentDidUpdate() {
+        if (this.props.name !== this.state.categoryName && this.state.categoryName !== 'all') {
+            this.loadProducts(this.props.name ? this.props.name : 'all');
+        }
+       
+    }
 
     render() { 
         const { products } = this.state;
 
         return (
             <div className='main-content'>
-                <div className='category-header'>Category name</div>
+                <div className='category-header'>{ this.state.categoryName }</div>
                 <div className='products-container'>
-                    {products.map(product => { 
-                        return <ProductCard key={product.id} {...product}/>
+                    {products.length && products.map(product => { 
+                        return <ProductCard key={product.id} product={product} onAddToCart={ this.onAddToCart }/>
                     }) }
                 </div>
+                {
+                    this.state.alertVisible && <Alert message={this.state.message} toggleAlert={this.toggleAlert} timeOut={3000}/>
+                }
+                
             </div>
         );
     }
+
+    onAddToCart = (title) => {
+        this.setState({
+            message: `${title} was added to the cart`
+        });
+        this.toggleAlert();
+    };
+
+
+    toggleAlert = () => { 
+        this.setState({alertVisible: !this.state.alertVisible})
+    }    
 }
 
-export { CategoryPage };
+export default CategoryPage;

@@ -1,0 +1,46 @@
+.pdp-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    min-height: 595px;
+    gap: 60px;
+}
+
+.pdp-images-container {
+    display: flex;
+    flex-direction: column;
+    width: 79px;
+    gap: 30px;
+}
+
+.pdp-small-image {
+    width: 79px;
+    height: 80px;
+}
+
+.pdp-image-container {
+    display: flex;
+    width: 610px;
+    height: 511px;
+}
+
+.pdp-info-container {
+    display: flex;
+    flex-direction: column;
+    width: calc(100vh - 43%);
+    gap: 30px;
+}
+
+.pdp-info-title {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.pdp-info-description {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 159.96%;    
+}

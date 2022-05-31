@@ -9,6 +9,7 @@
     --clr-black: #1D1F22;
     --clr-white: #ffffff;
     --clr-gray: #C4C4C4;
+    --clr-dark-gray: #8D8F9A;
     --clr-gray-selected: #EEEEEE;
     --left: 7%;
     --right: 7%;
@@ -23,4 +24,36 @@
     min-height: calc(100vh -  80px);
     padding: 1.5rem 0;
   
+}
+
+.btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--clr-white); 
+    border: 0;
+
+    font-family: 'Raleway';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 120%;
+    text-transform: uppercase;
+    text-align: center;    
+}
+
+.btn-cart-small {
+    width: 140px;
+    height: 43px;
+}
+
+.btn:active {
+    transform: translateY(-1px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, .2);
+}
+
+.btn:hover{
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, .2);
+    color: var(--clr-black);
 }

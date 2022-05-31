@@ -1,13 +1,28 @@
-import { Route, Routes, Router } from 'react-router-dom';
+import { Route, Routes, useParams } from 'react-router-dom';
 import './App.css';
-import { CategoryPage } from './routes/category-page/category-page.component';
-import { Navigation } from './routes/navigation/navigation.component';
+import CartPage from './routes/cart-page/cart-page.component';
+import CategoryPage from './routes/category-page/category-page.component';
+import Navigation from './routes/navigation/navigation.component';
+import ProductDetailPage  from './routes/product-detail-page/product-detail-page.component';
 
 function App() {
+    const WrapperPDP = () => { 
+        const params = useParams();
+        return <ProductDetailPage {...params} />
+    };
+
+    const WrapperCP = () => { 
+        const params = useParams();
+        return <CategoryPage {...params} />
+    }
+
     return (
         <Routes>
             <Route path='/' element={ <Navigation /> }>
-                <Route index element={ <CategoryPage /> } />
+                <Route index element={<CategoryPage />} />
+                <Route path='/category/:name' element={<WrapperCP />} />
+                <Route path='/cart' element={<CartPage />} />
+                <Route path='/pdp/:productId' element={ <WrapperPDP />}/>
             </Route>
         </Routes>            
     );

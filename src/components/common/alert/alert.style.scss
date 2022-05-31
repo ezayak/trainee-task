@@ -1,0 +1,33 @@
+.alert-container {
+    position: fixed;
+    display: flex;
+    top: var(--header-height);
+    right: 180px;
+    background-color: var(--clr-white);
+    filter: drop-shadow(0px 4px 10px rgba(168, 172, 176, 0.19));
+    min-width: 200px;
+    min-height: 50px;
+    align-items: center;
+    justify-content: center;
+    animation: alert-appereance 1s;
+    padding: 5px;
+}
+
+.alert-message {
+    font-family: 'Raleway';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 20px;
+    color: var(--clr-black); 
+}
+
+@keyframes alert-appereance {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}

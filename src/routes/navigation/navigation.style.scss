@@ -1,5 +1,5 @@
 .header {
-    position: absolute;
+    position: fixed;
     flex-direction: row;
     width: 100%;
     height: var(--header-height);
@@ -7,6 +7,8 @@
     top: 0px;
     background: var(--clr-white);
     //background: rgba(150, 145, 145, 0.774);
+    overflow: hidden;
+    z-index: 40;
 }
 
 .navigation {
@@ -68,4 +70,22 @@
     }
 }
 
+.cart-quantity {
+    background: var(--clr-black);
+    color: var(--clr-white);
+    border-radius: 60px;
+    width: 20px;
+    height: 20px;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
+    position: absolute;
+    left: 96.5%;
+    top: 10.25%;
+}

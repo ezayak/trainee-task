@@ -10,13 +10,15 @@ class GroupLabel extends React.Component {
         };
     }
 
-    render() { 
+    render() {
+        const toLink = this.props.name === 'all' ? '' : `/category/${this.props.name}`;
         return (
             <div className='navigation-label'>
-                <span><Link to='/'>{ this.props.name }</Link></span>
+                <span><Link to={toLink}>{ this.props.name }</Link></span>
             </div>
         );
     }
+
 }
 
 export { GroupLabel };

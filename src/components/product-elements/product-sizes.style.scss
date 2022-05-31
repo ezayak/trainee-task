@@ -6,27 +6,6 @@
     gap: 8px;
 }
 
-.size {
-    width: 24px;
-    height: 24px;
-    font-family: 'Source Sans Pro';
-    font-style: normal;
-    text-transform: uppercase;
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 160%;
-    background: rgba(255, 255, 255, 0.2);
-    border: 1px solid #1D1F22;
-    text-align: center;  
-    margin-top: 8px;  
-
-}
-
-.active {
-    background-color: var(--clr-black);
-    color: var(--clr-white);
-}    
-
 .size-header {
     font-family: 'Raleway';
     font-style: normal;
@@ -36,5 +15,7 @@
 }
 
 .sizes-container {
-    margin: 10px 0 10px 0;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
 }

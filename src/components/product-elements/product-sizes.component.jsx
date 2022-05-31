@@ -1,40 +1,39 @@
 import './product-sizes.style.scss';
 import React from 'react';
+import { ButtonSize } from '../common/styled/buttons.styled.component';
+import { ColorSizeSpan } from '../shopping-cart/shopping-cart.styled.component';
 
 class ProductSizes extends React.Component { 
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            sizes: props.sizes ? props.sizes : []
-        }
-    }
-
     render() { 
-        const { sizes } = this.state;
+        const { sizes, modal } = this.props;
         
 
         return (
-            <div className='sizes-container'>
-                <span className='size-header'>Size:</span>
-                <div className='sizes'>
-                    {
-                        sizes.map(size => {
-                            const classname = size.selected ? 'size active' : 'size';
-                            return (
-                                <div className={classname} key={size.size}>
-                                    {size.size}
-                                </div>
-                            );
-                        })
-                    }
-                </div>
-            </div>
+            <>
+                {
+                    sizes.length > 0 &&
+                    <div className='sizes-container'>
+                        <ColorSizeSpan modal={modal}>Size:</ColorSizeSpan>
+                        <div className='sizes'>
+                            {
+                                sizes.map(size => {
+                                    const selected = !size.selected ? false : size.selected;
+                                    return (
+                                        <ButtonSize key={size.id} id={size.id} modal={modal} selected={selected} onClick={this.changeSize}>
+                                            {size.value}
+                                        </ButtonSize>
+                                    );
+                                })
+                            }
+                        </div>
+                    </div>
+                }
+            </>
         );
     }
 
-    getClassName = (size) => {
-        return size.selected ? 'size active' : 'size';
+    changeSize = (event) => {
+        this.props.onChange(event, this.props.id, 'size', event.target.id);
     }
 }
 
