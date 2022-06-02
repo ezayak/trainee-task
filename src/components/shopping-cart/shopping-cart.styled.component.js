@@ -6,6 +6,7 @@ const TitleDiv = styled.div`
     font-weight: ${props => props.modal ? '300' : '400'};
     font-size: ${props => props.modal ? '16px' : '30px'};
     line-height: ${props => props.modal ? '25.6px' : '27px'};
+    color: var(--clr-black);
 `;
 
 const BrandDiv = styled.div`
@@ -14,6 +15,8 @@ const BrandDiv = styled.div`
     font-weight: ${props => props.modal ? '400' : '600'};
     font-size: ${props => props.modal ? '16px' : '30px'};
     line-height: ${props => props.modal ? '160%' : '27px'};
+    color: var(--clr-black);
+
 `;
 
 const PriceDiv = styled.div`
@@ -21,7 +24,8 @@ const PriceDiv = styled.div`
     font-style: normal;
     font-weight: ${props => props.modal ? '500' : '700'};
     font-size: ${props => props.modal ? '16px' : '24px'};
-    line-height: ${props => props.modal ? '160%' : '24px'};        
+    line-height: ${props => props.modal ? '160%' : '24px'};
+    color: var(--clr-black);
 `;
 
 const InfoDiv = styled.div`
@@ -37,6 +41,7 @@ const InfoDiv = styled.div`
 `;
 
 const ShoppingCartItemDiv = styled.div`
+    position: relative;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -75,6 +80,7 @@ const ShoppingCartQuantityDiv = styled.div`
     line-height: '160%';
 
     width: ${props => props.modal ? '24px' : '45px'};
+    padding-top: 3px;
 `;
 
 const ColorSizeSpan = styled.span`

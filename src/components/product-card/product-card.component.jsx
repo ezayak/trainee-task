@@ -28,7 +28,7 @@ class ProductCard extends React.Component {
     };
 
     componentDidUpdate = () => {
-        if (this.props.currency.label !== this.state.currency.label) {
+        if (this.props.currency && this.props.currency.label !== this.state.currency.label) {
             this.setState({
                 currency: this.props.currency,
                 price: getPrice(this.props.currency, this.props.product.prices)

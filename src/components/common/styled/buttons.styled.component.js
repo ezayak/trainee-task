@@ -4,6 +4,7 @@ const Button = styled.button`
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 3px;
     background-color: var(--clr-white); 
     border: 0;
 
@@ -15,6 +16,7 @@ const Button = styled.button`
     text-transform: uppercase;
     color: var(--clr-black);
     text-align: center;
+    z-index: 0;
 
     &:active {
         transform: translateY(-1px);
@@ -45,16 +47,20 @@ const ButtonSize = styled(Button)`
 `;
 
 const ColorDiv = styled.div`
-    width: ${props => props.modal ? '20px' : '28px'};
-    height: ${props => props.modal ? '20px' : '28px'};
+    width: ${props => props.modal ? '16px' : '28px'};
+    height: ${props => props.modal ? '16px' : '28px'};
     background-color: ${props => props.color || 'var(--clr-white)'};
 `;
 
 const ButtonColorOutline = styled(Button)`
-    width: ${props => props.modal ? '24px' : '32px'};
-    height: ${props => props.modal ? '24px' : '32px'};
-    background-color: 'var(--clr-white)';
-    border: ${props => props && props.selected ? '1px solid var(--clr-green)' : '0px'};
+    width: ${props => props.modal ? '20px' : '32px'};
+    height: ${props => props.modal ? '20px' : '32px'};
+    background-color: ${props => props.selected ?'var(--clr-white)' : props.color};
+    border: ${props => props && props.selected ? '1px solid var(--clr-green)' : props.color === '#FFFFFF' ? '1px solid var(--clr-black)' :'0px'};
+    padding: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center
 `;
 
 const ButtonQuantity = styled(Button)`

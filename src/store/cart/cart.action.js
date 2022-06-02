@@ -6,46 +6,48 @@ const compareAttributes = (attr1, attr2) => {
     let arraysEqual = true;
 
     attr1.forEach((element, index) => {
-        if ( objectsEqual(attr1[index], attr2[index]) ) { 
+        if ( !objectsEqual(attr1[index], attr2[index]) ) { 
             arraysEqual = false;        }
     });
 
     return arraysEqual;
 }
 
+const isSameProduct = (product1, product2) => { 
+    if (product1.id !== product2.id) { 
+        return false;
+    } else {
+        return compareAttributes(product1.sizes, product2.sizes) && compareAttributes(product1.colors, product2.colors);
+    }
+};
+
 const addCartItem = (cartItems, productToAdd) => {
     const existingCartItem = cartItems.find(
-        (cartItem) => {
-            if (cartItem.id !== productToAdd.id) {
-                return false;
-            } else {
-                return compareAttributes(productToAdd.sizes, cartItem.sizes) && compareAttributes(productToAdd.colors, cartItem.colors);
-            }
-        }
+        (cartItem) => isSameProduct(cartItem, productToAdd)
     );
 
     if (existingCartItem) {
       return cartItems.map((cartItem) =>
-        cartItem.id === productToAdd.id
-          ? { ...cartItem, quantity: cartItem.quantity + 1 }
-          : cartItem
+        existingCartItem.idCart === cartItem.idCart
+            ? { ...cartItem, quantity: cartItem.quantity + 1 }
+            : cartItem
       );
   };
   
-    return [...cartItems, { ...productToAdd, quantity: 1 }];
+    return [...cartItems, { ...productToAdd, idCart: productToAdd.id.concat(cartItems.length), quantity: 1 }];
 };
 
-const changeCartQuantity = (cartItems, id, quantity) => {
+const changeCartQuantity = (cartItems, idCart, quantity) => {
     const existingCartItem = cartItems.find(
-        (cartItem) => cartItem.id === id
+        (cartItem) => cartItem.idCart === idCart
     );
 
     if (existingCartItem) { 
         if (existingCartItem.quantity + quantity === 0) {
-            return cartItems.filter((cartItem) => cartItem.id !== id);
+            return cartItems.filter((cartItem) => cartItem.idCart !== idCart);
         } else {
             return cartItems.map((cartItem) =>
-                {return cartItem.id === id
+                {return cartItem.idCart === idCart
                     ? { ...cartItem, quantity: cartItem.quantity + quantity }
                     : cartItem}
             );      
@@ -61,10 +63,10 @@ export const changeAttribute = (cartItem, selectedOption) => {
     return newValues;
 }
 
-const changeCartOptions = (cartItems, id, selectedOption) => { 
+const changeCartOptions = (cartItems, idCart, selectedOption) => { 
     const elementName = selectedOption.name + 's';
     return cartItems.map((cartItem) => {
-        if (cartItem.id === id) { 
+        if (cartItem.idCart === idCart) { 
             const newValues = changeAttribute(cartItem, selectedOption);
             return {
                 ...cartItem,
@@ -81,8 +83,8 @@ export const addItemToCart = (cartItems, productToAdd) => {
     return createAction(CART_ACTION_TYPES.SET_CART_ITEMS, newCartItems);
 };
   
-export const changeItemQuantity = (cartItems, id, quantity) => { 
-    const newCartItems = changeCartQuantity(cartItems, id, quantity);
+export const changeItemQuantity = (cartItems, idCart, quantity) => { 
+    const newCartItems = changeCartQuantity(cartItems, idCart, quantity);
     return createAction(CART_ACTION_TYPES.SET_CART_ITEMS, newCartItems);
 }
 

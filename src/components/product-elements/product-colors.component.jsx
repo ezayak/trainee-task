@@ -18,7 +18,7 @@ class ProductColors extends React.Component {
                                 colors.map(color => {
                                     const selected = !color.selected ? false : color.selected;
                                     return (
-                                        <ButtonColorOutline key={color.id} modal={modal} selected={ selected } onClick={this.changeColor}>
+                                        <ButtonColorOutline key={color.id} modal={modal} selected={ selected } onClick={this.changeColor}  color={color.value}>
                                             <ColorDiv color={color.value} id={color.id} modal={modal} />
                                         </ButtonColorOutline>
                                     )

@@ -9,13 +9,44 @@
 .pdp-images-container {
     display: flex;
     flex-direction: column;
-    width: 79px;
+    width: 170px;
     gap: 30px;
+    max-height: 550px;
+    overflow-y: auto;
+    direction: rtl;
+
+}
+
+.pdp-images-container::-webkit-scrollbar {
+    width: 5px;
+}
+  
+.pdp-images-container::-webkit-scrollbar-track {
+    background-color: #f8f1f1;
+    border-radius: 100px;
+}
+  
+.pdp-images-container::-webkit-scrollbar-thumb {
+    border-radius: 100px;
+    background-image: linear-gradient(180deg, #e5f9e8 0%, var(--clr-green) 99%);
+    box-shadow: inset 2px 2px 5px 0 rgb(255 255 255 / 50%);
 }
 
 .pdp-small-image {
-    width: 79px;
-    height: 80px;
+    max-width: 79px;
+    max-height: 80px;
+
+    &:onmouseover{
+        transform: translateY(-3px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, .2);
+    }
+}
+
+.pdp-image-div{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    padding-left: 10px;
 }
 
 .pdp-image-container {
@@ -24,10 +55,20 @@
     height: 511px;
 }
 
+.pdp-image {
+    max-width: 100%;
+    max-height: 100%;
+
+    &:hover{
+        transform: translate(50px, 90px) scale(1.5);
+        box-shadow: 0 10px 20px rgb(0 0 0 / 20%);
+    }
+}
+
 .pdp-info-container {
     display: flex;
     flex-direction: column;
-    width: calc(100vh - 43%);
+    width: calc(100vh - 300px);
     gap: 30px;
 }
 

@@ -18,8 +18,9 @@ class ShoppingCartModal extends React.Component {
                             My bag,<span> { cartItems.length } items</span>
                         </div>
                         <ShoppingCartListDiv modal={modal}>
-                            {cartItems.map(item => {
-                                return <ShoppingCartItem key={item.id} {...item} currency={currency} modal={modal} onChange={this.props.onChange}/>
+                            {cartItems.map((item, index) => {
+                                const id = item.idCart;
+                                return <ShoppingCartItem key={id} {...item} currency={currency} modal={modal} onChange={this.props.onChange}/>
                             })}
                         </ShoppingCartListDiv>
                         <div className='shopping-cart-total-modal'>

@@ -1,11 +1,11 @@
 import './product-detail-page.style.scss';
-import React from "react";
+import React from 'react';
 import { getPrice } from '../../utils/common.utils';
 import { TitleDiv, BrandDiv, PriceDiv, ColorSizeSpan } from '../../components/shopping-cart/shopping-cart.styled.component';
 import { ProductColors } from '../../components/product-elements/product-colors.component';
 import { ProductSizes } from '../../components/product-elements/product-sizes.component';
 import { ButtonCheckout } from '../../components/common/styled/buttons.styled.component';
-import { getProductById } from "../../utils/apis/products.api";
+import { getProductById } from '../../utils/apis/products.api';
 import { connect } from 'react-redux';
 import { changeAttribute, addItemToCart } from '../../store/cart/cart.action';
 import { selectCartItems } from '../../store/cart/cart.selector';
@@ -23,6 +23,8 @@ class ProductDetailPage extends React.Component {
             ...props,
             loading: true,
             item: {},
+            selectedPicture: '',
+            currentPicture: ''
         }
     };
 
@@ -32,7 +34,9 @@ class ProductDetailPage extends React.Component {
             .then(data => { 
                 this.setState({
                     loading: false,
-                    item: data
+                    item: data,
+                    productId: id,
+                    selectedPicture: data.images.length > 0 ? data.images[0] : ''
                 })
             });
     }
@@ -45,6 +49,9 @@ class ProductDetailPage extends React.Component {
         if (this.props.currency.label !== this.state.currency.label) {
             this.setState({ currency: this.props.currency });
         }
+        if (this.props.productId !== this.state.productId) {
+            this.loadInfo(this.props.productId);
+        }
     }
 
     render() { 
@@ -56,20 +63,22 @@ class ProductDetailPage extends React.Component {
             <div className='main-content'>
                 {
                     !this.state.loading &&
-                        <div className="pdp-container">
-                            <div className="pdp-images-container">
+                        <div className='pdp-container'>
+                            <div className='pdp-images-container'>
                                 {item.images.map((image, index) => { 
                                     return (
-                                        <div className='pdp-small-image' key={`small-image-${index}`}>
-                                            <img src={image} alt=""  style={{'width': '100%'}}/>
+                                        <div key={`small-image-${index}`} className="pdp-image-div">
+                                            <img src={image} alt=''  style={{'width': '100%'}}  className='pdp-small-image'  onMouseOver={this.showCurrentPicture} onMouseOut={this.showSelectedPicture} onClick={this.selectPicture}/>
                                         </div>
                                     );
                                 })}
                             </div>
-                            <div className="pdp-image-container">
-                                { item.images.length > 0 && <img src={item.images[0]} alt="" style={{'width': '100%'}}/> }
+                            <div className='pdp-image-container'>
+                                {item.images.length > 0 &&
+                                    this.state.currentPicture !== '' ? <img src={this.state.currentPicture} alt='' className='pdp-image' /> :  <img src={this.state.selectedPicture} alt='' className='pdp-image' />
+                                }
                             </div>
-                            <div className="pdp-info-container">
+                            <div className='pdp-info-container'>
                                 <div className='pdp-info-title'>
                                     <BrandDiv>{item.brand}</BrandDiv>
                                     <TitleDiv>{item.name}</TitleDiv>
@@ -77,14 +86,26 @@ class ProductDetailPage extends React.Component {
                                 <ProductSizes sizes={item.sizes} onChange={ this.onChangeCartItem}/>
                                 <ProductColors colors={item.colors} onChange={ this.onChangeCartItem}/>
                                 <ColorSizeSpan >Price:</ColorSizeSpan>
-                                <PriceDiv>{ currency.symbol } {price}</PriceDiv>
-                                <ButtonCheckout onClick={this.addToCart}>Add to cart</ButtonCheckout>
+                                <PriceDiv>{currency.symbol} {price}</PriceDiv>
+                                { this.state.item.inStock && <ButtonCheckout onClick={this.addToCart}>Add to cart</ButtonCheckout> }
                                 <div className='pdp-info-description' dangerouslySetInnerHTML={this.createMarkup()}></div>
                             </div>
                         </div>
                 }
             </div>
         );
+    }
+
+    showCurrentPicture = (event) => {
+        this.setState({currentPicture: event.target.src});
+    }
+
+    showSelectedPicture = (event) => { 
+        this.setState({currentPicture: ''});
+    }
+
+    selectPicture = (event) => { 
+        this.setState({selectedPicture: event.target.src});
     }
 
     createMarkup = () => {

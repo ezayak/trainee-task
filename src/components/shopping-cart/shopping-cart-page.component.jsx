@@ -19,7 +19,7 @@ class ShoppingCartPage extends React.Component {
                     <ShoppingCartListDiv>
                         <hr/>
                         {cartItems.length > 0 && cartItems.map((item, index) => {
-                            const id = item.id.concat(index);
+                            const id = item.idCart;
                             return (
                                 <Fragment  key={id}>
                                     <ShoppingCartItem {...item} currency={currency} onChange={ onChange }/>

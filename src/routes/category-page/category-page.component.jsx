@@ -48,7 +48,7 @@ class CategoryPage extends React.Component {
             <div className='main-content'>
                 <div className='category-header'>{ this.state.categoryName }</div>
                 <div className='products-container'>
-                    {products.length && products.map(product => { 
+                    {products.length > 0 && products.map(product => { 
                         return <ProductCard key={product.id} product={product} onAddToCart={ this.onAddToCart }/>
                     }) }
                 </div>
