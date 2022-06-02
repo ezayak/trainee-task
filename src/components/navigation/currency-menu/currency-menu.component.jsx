@@ -27,8 +27,8 @@ class CurrencyMenu extends React.Component {
                     currencies.map(currency => { 
                         return (
                             <div className='currency-element' onClick={this.selectCurrency} key={currency.label}  id={currency.label}>
-                                <span> {currency.symbol}</span>
-                                <span> {currency.label}</span>
+                                <span  id={currency.label}> {currency.symbol}</span>
+                                <span  id={currency.label}> {currency.label}</span>
                             </div>
                         )
                     })
