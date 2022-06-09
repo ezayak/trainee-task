@@ -36,15 +36,6 @@ class ShoppingCartModal extends React.Component {
             </div>
         );
     }
-
-    // onChangeCartItem = (event, id, type, value) => {
-    //     switch (type) {
-    //         case 'size': this.props.changeCartItemSize(this.props.cartItems, id, value); break;
-    //         case 'color': this.props.changeCartItemColor(this.props.cartItems, id, value); break;
-    //         case 'quantity': this.props.changeItemQuantity(this.props.cartItems, id, value); break;
-    //     }
-    //     event.stopPropagation();
-    // }
 }
 
 export default ShoppingCartModal;
