@@ -15,6 +15,7 @@
     box-shadow: 0px 4px 35px 0px #A8ACB030;
     color: var(--clr-black);
     transform: scale(1.1);
+    background-color: var(--clr-white);
 }
 
 .product-spacer {
@@ -44,8 +45,8 @@
 }
 
 .product-image-container {
-    min-width: var(--product-card-image-wdith);
-    min-height: var(--product-card-image-height);   
+    width: var(--product-card-image-wdith);
+    height: var(--product-card-image-height);   
 }
 
 .product-image {

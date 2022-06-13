@@ -30,6 +30,8 @@ class Navigation extends React.Component {
             currencies: [],
             currency: props.currency
         };   
+
+        this.cartRef = React.createRef();
     }
 
     loadCategories = () => {
@@ -99,7 +101,12 @@ class Navigation extends React.Component {
                     </div>
                 </div>
                 {visibleCurrencyMenu && <CurrencyMenu currencies={currencies} />}
-                {visibleCart && <ShoppingCart modal={ true }/>}
+                {
+                    visibleCart && 
+                        <div ref={this.cartRef}>
+                            <ShoppingCart modal={ true }/>
+                        </div>
+                }
                 <Outlet />
             </Fragment>
         );
@@ -134,9 +141,13 @@ class Navigation extends React.Component {
     }
 
     closeCart = (event) => { 
-        this.setState({ visibleCart: false }, () => { 
-            document.removeEventListener('click', this.closeCart);
-        });
+        if (this.cartRef && this.cartRef.current &&
+            ((!this.cartRef.current.contains(event.target) || event.target.className === 'shopping-cart-overlay') ||
+                event.target.className.includes('shopping-cart-btn-bag'))) {
+            this.setState({ visibleCart: false }, () => {
+                document.removeEventListener('click', this.closeCart);
+            });
+        }
     }
 }
 

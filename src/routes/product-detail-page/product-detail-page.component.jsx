@@ -9,6 +9,7 @@ import { getProductById } from '../../utils/apis/products.api';
 import { connect } from 'react-redux';
 import { changeAttribute, addItemToCart } from '../../store/cart/cart.action';
 import { selectCartItems } from '../../store/cart/cart.selector';
+import { CONST_OUT_OF_STOCK } from '../../utils/common.utils';
 
 const mapStateToProps = (state) => selectCartItems;
 const mapDispatchToProps = {
@@ -55,6 +56,7 @@ class ProductDetailPage extends React.Component {
     }
 
     render() { 
+        const { currentPicture, selectedPicture } = this.state;
         const item = this.state.item;
         const currency = this.state.currency;
         const price = this.state.loading ? 0 : getPrice(currency, item.prices);
@@ -73,9 +75,23 @@ class ProductDetailPage extends React.Component {
                                     );
                                 })}
                             </div>
-                            <div className='pdp-image-container'>
-                                {item.images.length > 0 &&
-                                    this.state.currentPicture !== '' ? <img src={this.state.currentPicture} alt='' className='pdp-image' /> :  <img src={this.state.selectedPicture} alt='' className='pdp-image' />
+                            <div className='pdp-image-container'
+                                style={{
+                                    'backgroundImage': currentPicture !== '' ? `url(${currentPicture})` : `url(${selectedPicture})`,
+                                    'backgroundColor': 'var(--clr-white)',
+                                    'backgroundSize': 'contain',
+                                    'backgroundRepeat': 'no-repeat',
+                                    'backgroundPosition': '50% 50%'
+                                }}
+                            >
+                                {
+                                    !item.inStock &&
+                                    <>
+                                        <div className='out-of-stock-detailed'></div>
+                                        <div className='text-box-out-of-stock-detailed'>
+                                            { CONST_OUT_OF_STOCK }  
+                                        </div>
+                                    </>
                                 }
                             </div>
                             <div className='pdp-info-container'>
@@ -87,7 +103,7 @@ class ProductDetailPage extends React.Component {
                                 <ProductColors colors={item.colors} onChange={ this.onChangeCartItem}/>
                                 <ColorSizeSpan >Price:</ColorSizeSpan>
                                 <PriceDiv>{currency.symbol} {price}</PriceDiv>
-                                { this.state.item.inStock && <ButtonCheckout onClick={this.addToCart}>Add to cart</ButtonCheckout> }
+                                { item.inStock && <ButtonCheckout onClick={this.addToCart}>Add to cart</ButtonCheckout> }
                                 <div className='pdp-info-description' dangerouslySetInnerHTML={this.createMarkup()}></div>
                             </div>
                         </div>
