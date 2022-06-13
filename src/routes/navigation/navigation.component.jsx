@@ -103,7 +103,7 @@ class Navigation extends React.Component {
                 {visibleCurrencyMenu && <CurrencyMenu currencies={currencies} />}
                 {
                     visibleCart && 
-                        <div ref={this.cartRef}>
+                        <div ref={ this.cartRef }>
                             <ShoppingCart modal={ true }/>
                         </div>
                 }
@@ -141,9 +141,9 @@ class Navigation extends React.Component {
     }
 
     closeCart = (event) => { 
-        if (this.cartRef && this.cartRef.current &&
+        if (!event || (this.cartRef && this.cartRef.current &&
             ((!this.cartRef.current.contains(event.target) || event.target.className === 'shopping-cart-overlay') ||
-                event.target.className.includes('shopping-cart-btn-bag'))) {
+                event.target.className.includes('shopping-cart-btn-bag')))) {
             this.setState({ visibleCart: false }, () => {
                 document.removeEventListener('click', this.closeCart);
             });

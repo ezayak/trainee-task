@@ -42,18 +42,18 @@ class CategoryPage extends React.Component {
     }
 
     render() { 
-        const { products } = this.state;
+        const { products, alertVisible,  message, categoryName} = this.state;
 
         return (
             <div className='main-content'>
-                <div className='category-header'>{ this.state.categoryName }</div>
+                <div className='category-header'>{ categoryName }</div>
                 <div className='products-container'>
                     {products.length > 0 && products.map(product => { 
                         return <ProductCard key={product.id} product={product} onAddToCart={ this.onAddToCart }/>
                     }) }
                 </div>
                 {
-                    this.state.alertVisible && <Alert message={this.state.message} toggleAlert={this.toggleAlert} timeOut={3000}/>
+                    alertVisible && <Alert message={message} toggleAlert={this.toggleAlert} timeOut={3000}/>
                 }
                 
             </div>

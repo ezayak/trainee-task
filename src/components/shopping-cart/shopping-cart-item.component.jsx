@@ -19,25 +19,35 @@ class ShoppingCartItem extends React.Component {
 
     render() { 
         const price = getPrice(this.props.currency, this.props.prices).toFixed(2);
+        const { sizes, colors, id, brand, modal, name, currency, idCart, quantity, images, onChange } = this.props;
+        const { indexPicture } = this.state;
 
         return (
-            <ShoppingCartItemDiv modal={ this.props.modal }>
-                <InfoDiv modal={this.props.modal} onClick={this.openPDP}>
-                    { this.props.brand && this.props.brand !== '' && <BrandDiv modal={ this.props.modal }>{ this.props.brand }</BrandDiv>}
-                    <Link to={`/pdp/${this.props.id}`}><TitleDiv modal={ this.props.modal }>{ this.props.name }</TitleDiv></Link>
-                    <PriceDiv modal={this.props.modal}>{ this.props.currency.symbol } {price}</PriceDiv>
-                    <ProductSizes sizes={this.props.sizes} modal={this.props.modal} onChange={this.props.onChange} id={ this.props.idCart }/>
-                    <ProductColors colors={ this.props.colors } modal={ this.props.modal } onChange={ this.props.onChange } id={ this.props.idCart }/>
-                </InfoDiv>
-                <ShoppingCartQuantityDiv modal={ this.props.modal }>
-                    <ButtonQuantity modal={this.props.modal} onClick={ (event) => this.onChangeQuantity(event, 1) }>+</ButtonQuantity>
-                    <div>{this.props.quantity}</div>
-                    <ButtonQuantity modal={ this.props.modal } onClick={ (event) => this.onChangeQuantity(event, -1) }>-</ButtonQuantity>                        
-                </ShoppingCartQuantityDiv>
-                <ShoppingCartImageDiv modal={this.props.modal}>
-                    {this.props.images && this.props.images.length > 0 && <img src={this.props.images[this.state.indexPicture]} alt='' style={{ 'width': '100%', 'height': '100%' }} />}
+            <ShoppingCartItemDiv modal={ modal }>
+                <InfoDiv modal={modal} onClick={this.openPDP}>
+                    { brand && brand !== '' && <BrandDiv modal={ modal }>{ brand }</BrandDiv>}
+                    <Link to={`/pdp/${id}`}><TitleDiv modal={ modal }>{ name }</TitleDiv></Link>
+                    <PriceDiv modal={modal}>{currency.symbol} {price}</PriceDiv>
                     {
-                        !this.props.modal && this.props.images && this.props.images.length > 1 &&
+                        sizes.map(size => { 
+                            return <ProductSizes key={size.id} sizes={size} modal={modal} onChange={onChange} id={idCart}/>;
+                        })
+                    }
+                    {
+                        colors.map(color => {
+                            return <ProductColors key={color.id} colors={ color } modal={ modal } onChange={ onChange } id={ idCart }/>
+                        })
+                    }                    
+                </InfoDiv>
+                <ShoppingCartQuantityDiv modal={ modal }>
+                    <ButtonQuantity modal={modal} onClick={ (event) => this.onChangeQuantity(event, 1) }>+</ButtonQuantity>
+                    <div>{quantity}</div>
+                    <ButtonQuantity modal={ modal } onClick={ (event) => this.onChangeQuantity(event, -1) }>-</ButtonQuantity>                        
+                </ShoppingCartQuantityDiv>
+                <ShoppingCartImageDiv modal={modal}>
+                    {images && images.length > 0 && <img src={images[indexPicture]} alt='' style={{ 'width': '100%', 'height': '100%' }} />}
+                    {
+                        !modal && images && images.length > 1 &&
                         <div className='cart-image-buttons'>
                             <div className='cart-image-button cart-image-left' onClick={this.changePicture}>
                                 <img src={leftArrow} id='button-img-left' alt=''/>
@@ -53,7 +63,7 @@ class ShoppingCartItem extends React.Component {
     }
 
     onChangeQuantity = (event, newValue) => { 
-        this.props.onChange(event, this.props.idCart, 'quantity', newValue);
+        this.props.onChange(event, '', 'quantity', newValue, this.props.idCart);
     }
 
     changePicture = (event) => { 

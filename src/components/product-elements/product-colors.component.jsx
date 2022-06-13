@@ -10,15 +10,15 @@ class ProductColors extends React.Component {
         return (
             <>
                 {
-                    colors.length > 0 &&
+                    colors.items.length > 0 &&
                     <div className='colors-container'>
-                        <ColorSizeSpan modal={modal}>Color:</ColorSizeSpan>
+                            <ColorSizeSpan modal={modal}>{ colors.name }</ColorSizeSpan>
                         <div className='colors'>
                             {
-                                colors.map(color => {
+                                colors.items.map(color => {
                                     const selected = !color.selected ? false : color.selected;
                                     return (
-                                        <ButtonColorOutline key={color.id} modal={modal} selected={ selected } onClick={this.changeColor}  color={color.value}>
+                                        <ButtonColorOutline key={`${colors.id}${color.id}`} modal={modal} selected={ selected } onClick={this.changeColor}  color={color.value}>
                                             <ColorDiv color={color.value} id={color.id} modal={modal} />
                                         </ButtonColorOutline>
                                     )
@@ -33,7 +33,7 @@ class ProductColors extends React.Component {
 
 
     changeColor = (event) => {
-        this.props.onChange(event, this.props.id, 'color', event.target.id);
+        this.props.onChange(event, this.props.colors.id, 'color', event.target.id, this.props.id);
     }
 }
 

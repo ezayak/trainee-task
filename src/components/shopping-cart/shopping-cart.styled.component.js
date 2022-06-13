@@ -49,10 +49,11 @@ const ShoppingCartItemDiv = styled.div`
     gap: 8px;
 
     width: 100%;
-    height: ${props => props.modal ? '100%' : '280px'};
+    min-height: ${props => props.modal ? '' : '280px'};
+    height: ${props => props.modal ? '100%' : ''};
 
     font-family: 'Raleway';
-    font-style: normal;  
+    font-style: normal;
 `;
 
 const ShoppingCartImageDiv = styled.div`

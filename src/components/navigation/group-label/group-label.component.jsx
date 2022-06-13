@@ -12,9 +12,11 @@ class GroupLabel extends React.Component {
 
     render() {
         const toLink = this.props.name === 'all' ? '' : `/category/${this.props.name}`;
+        const { name } = this.props;
+
         return (
             <div className='navigation-label'>
-                <span><Link to={toLink}>{ this.props.name }</Link></span>
+                <span><Link to={toLink}>{ name }</Link></span>
             </div>
         );
     }

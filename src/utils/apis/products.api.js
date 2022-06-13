@@ -121,7 +121,7 @@ const formatItem = (item) => {
         description: item.description,
         category: item.category,
         brand: item.brand ? item.brand : '',
-        title: item.brand ? item.brand : '' + ' ' + item.name,
+        title: (item.brand ? item.brand + ' ' : '') + item.name,
         sizes: getAttributeArray(item.attributes, 'text'),
         colors: getAttributeArray(item.attributes, 'swatch'),
         images: item.gallery,
@@ -131,27 +131,25 @@ const formatItem = (item) => {
 }
 
 const getAttributeArray = (attributes, type) => { 
-    const attribute = attributes.filter(attribute => { 
+    const attributesFilter = attributes.filter(attribute => { 
         return attribute.type === type;
     });
 
-    if (attribute.length > 0) { 
-        if (attribute[0].items.length) {
-            const items = attribute[0].items.map((item, index) => {
-                if (index === 0) {
-                    return { ...item, selected: true };
-                } else {
-                    return { ...item, selected: false };
-                }
-            });
+    const res = [];
 
-            return items
-        } else { 
-            return [];
-        }
-    } else {
-        return [];
-    }
+    attributesFilter.forEach(attribute => { 
+        const items = attribute.items.map((item, index) => {
+            if (index === 0) {
+                return { ...item, selected: true };
+            } else {
+                return { ...item, selected: false };
+            }
+        });
+
+        res.push({id: attribute.id, name: attribute.name, items: items});
+    });
+
+    return res;
 }
 
 export { getProductListByCategory, getProductById };

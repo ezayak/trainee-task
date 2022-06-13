@@ -19,7 +19,7 @@ class ProductCard extends React.Component {
         
         this.state = {
             id: props.product.id,
-            name: props.product.name,
+            title: props.product.title,
             img: props.product.images.length > 0 ? props.product.images[0] : '',
             price: getPrice(props.currency, props.product.prices),
             inStock: props.product.inStock,
@@ -37,7 +37,7 @@ class ProductCard extends React.Component {
     }
 
     render() { 
-        const { name, img, id, inStock, currency } = this.state;
+        const { title, img, id, inStock, currency } = this.state;
         const classTitle = !inStock ? ' text-out-of-stock' : '';
         const price = this.state.price.toFixed(2);
 
@@ -60,7 +60,7 @@ class ProductCard extends React.Component {
                                 <>
                                     <div className='out-of-stock'></div>
                                     <div className='text-box-out-of-stock'>
-                                            { CONST_OUT_OF_STOCK }  
+                                        { CONST_OUT_OF_STOCK }  
                                     </div>
                                 </>
                             }
@@ -75,7 +75,7 @@ class ProductCard extends React.Component {
                     <div className='product-spacer'></div>
                     <div className={`product-content ${classTitle}`}>
                         <div className='product-title'>
-                            {name}
+                            {title}
                         </div>
                         <div className='product-price'>
                             { currency.symbol } {price}

@@ -1,6 +1,14 @@
 import { CART_ACTION_TYPES } from "./cart.types";
 
-const items = localStorage.getItem('cartItems') !== null ? JSON.parse(localStorage.getItem('cartItems')) : [];
+let items = localStorage.getItem('cartItems') !== null ? JSON.parse(localStorage.getItem('cartItems')) : [];
+
+//fixing problems with old format basket
+items.forEach(item => {
+    if ((item.sizes.length > 0 && item.sizes[0].name === undefined) || (item.colors.length > 0 && item.colors[0].name === undefined)) {
+        items = [];
+    }
+});
+
 const INITIAL_STATE = {
     cartItems: items
 }

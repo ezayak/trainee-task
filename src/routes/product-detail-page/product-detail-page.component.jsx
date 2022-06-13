@@ -61,6 +61,8 @@ class ProductDetailPage extends React.Component {
         const currency = this.state.currency;
         const price = this.state.loading ? 0 : getPrice(currency, item.prices);
 
+        console.log('item', item);
+
         return (
             <div className='main-content'>
                 {
@@ -99,8 +101,17 @@ class ProductDetailPage extends React.Component {
                                     <BrandDiv>{item.brand}</BrandDiv>
                                     <TitleDiv>{item.name}</TitleDiv>
                                 </div>
-                                <ProductSizes sizes={item.sizes} onChange={ this.onChangeCartItem}/>
-                                <ProductColors colors={item.colors} onChange={ this.onChangeCartItem}/>
+                                {
+                                    item.sizes.map(sizes => {
+                                        return <ProductSizes key={sizes.id} sizes={sizes} onChange={this.onChangeCartItem} />;
+                                    })
+                                }
+                                {
+                                    item.colors.map(colors => { 
+                                        return <ProductColors key={colors.id} colors={colors} onChange={this.onChangeCartItem} />;
+                                    })
+                                }
+                                
                                 <ColorSizeSpan >Price:</ColorSizeSpan>
                                 <PriceDiv>{currency.symbol} {price}</PriceDiv>
                                 { item.inStock && <ButtonCheckout onClick={this.addToCart}>Add to cart</ButtonCheckout> }
@@ -133,15 +144,15 @@ class ProductDetailPage extends React.Component {
     }
 
 
-    onChangeCartItem = (event, id, type, value) => {
+    onChangeCartItem = (event, id, type, value, idCart) => {
         switch (type) {
             case 'size': {
-                const newAttributes = changeAttribute(this.state.item, { name: 'size', value: value });
+                const newAttributes = changeAttribute(this.state.item, { name: 'size', value: value, id :id });
                 this.setState({ item: { ...this.state.item, sizes: newAttributes } });
                 break;
             }
             case 'color': {
-                const newAttributes = changeAttribute(this.state.item, { name: 'color', value: value });
+                const newAttributes = changeAttribute(this.state.item, { name: 'color', value: value, id :id });
                 this.setState({ item: { ...this.state.item, colors: newAttributes } });
                 break;
             }

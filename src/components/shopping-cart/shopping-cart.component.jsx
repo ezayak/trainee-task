@@ -15,10 +15,12 @@ const mapDispatchToProps = {
 
 class ShoppingCart extends React.Component { 
     render() { 
+        const { modal } = this.props;
+        
         return (
             <>
             {
-                this.props.modal ?
+                modal ?
                     <ShoppingCartMoldal {...this.props} onChange = { this.onChangeCartItem } /> 
                 :
                     <ShoppingCartPage {...this.props} onChange={this.onChangeCartItem} />
@@ -27,11 +29,11 @@ class ShoppingCart extends React.Component {
         );
     }
 
-    onChangeCartItem = (event, id, type, value) => {
+    onChangeCartItem = (event, id, type, value, idCart) => {
         switch (type) {
-            case 'size': this.props.changeCartItemSize(this.props.cartItems, id, value); break;
-            case 'color': this.props.changeCartItemColor(this.props.cartItems, id, value); break;
-            case 'quantity': this.props.changeItemQuantity(this.props.cartItems, id, value); break;
+            case 'size': this.props.changeCartItemSize(this.props.cartItems, idCart, { value: value, id :id }); break;
+            case 'color': this.props.changeCartItemColor(this.props.cartItems, idCart, { value: value, id :id }); break;
+            case 'quantity': this.props.changeItemQuantity(this.props.cartItems, idCart, value); break;
             default: break;
         }
         event.stopPropagation();

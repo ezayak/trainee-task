@@ -18,7 +18,7 @@ class ShoppingCartPage extends React.Component {
                     </div>
                     <ShoppingCartListDiv>
                         <hr/>
-                        {cartItems.length > 0 && cartItems.map((item, index) => {
+                        {cartItems.length > 0 && cartItems.map(item => {
                             const id = item.idCart;
                             return (
                                 <Fragment  key={id}>

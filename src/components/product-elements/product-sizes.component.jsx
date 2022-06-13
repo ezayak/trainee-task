@@ -6,20 +6,19 @@ import { ColorSizeSpan } from '../shopping-cart/shopping-cart.styled.component';
 class ProductSizes extends React.Component { 
     render() { 
         const { sizes, modal } = this.props;
-        
 
         return (
             <>
                 {
-                    sizes.length > 0 &&
+                    sizes.items && sizes.items.length > 0 &&
                     <div className='sizes-container'>
-                        <ColorSizeSpan modal={modal}>Size:</ColorSizeSpan>
+                            <ColorSizeSpan modal={modal}>{ sizes.name }</ColorSizeSpan>
                         <div className='sizes'>
                             {
-                                sizes.map(size => {
+                                sizes.items.map(size => {
                                     const selected = !size.selected ? false : size.selected;
                                     return (
-                                        <ButtonSize key={size.id} id={size.id} modal={modal} selected={selected} onClick={this.changeSize}>
+                                        <ButtonSize key={`${sizes.id}${size.id}`} id={size.id} modal={modal} selected={selected} onClick={this.changeSize}>
                                             {size.value}
                                         </ButtonSize>
                                     );
@@ -33,7 +32,8 @@ class ProductSizes extends React.Component {
     }
 
     changeSize = (event) => {
-        this.props.onChange(event, this.props.id, 'size', event.target.id);
+        console.log('event', event.target.id);
+        this.props.onChange(event, this.props.sizes.id, 'size', event.target.id, this.props.id);
     }
 }
 

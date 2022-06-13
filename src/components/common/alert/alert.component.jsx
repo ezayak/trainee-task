@@ -12,7 +12,7 @@ class Alert extends React.Component {
     };
 
     componentDidMount() { 
-        const timerId = setTimeout(() => { 
+        this.timerId = setTimeout(() => { 
             this.state.toggleAlert();
         }, this.props.timeOut);
     }
@@ -22,9 +22,10 @@ class Alert extends React.Component {
     }
 
     render() { 
+        const { message } = this.state;
         return (
             <div className="alert-container">
-                <div className="alert-message">{ this.state.message }</div>
+                <div className="alert-message">{ message }</div>
             </div>
         );
     };

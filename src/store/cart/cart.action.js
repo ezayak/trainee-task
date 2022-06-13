@@ -14,10 +14,23 @@ const compareAttributes = (attr1, attr2) => {
 }
 
 const isSameProduct = (product1, product2) => { 
+    console.log('product1', product1);
+    console.log('product2', product2);
+
     if (product1.id !== product2.id) { 
         return false;
     } else {
-        return compareAttributes(product1.sizes, product2.sizes) && compareAttributes(product1.colors, product2.colors);
+        let theSameAttributes = true;
+
+        product1.sizes.forEach((sizes1, index) => { 
+            theSameAttributes = theSameAttributes && compareAttributes(sizes1.items, product2.sizes[index].items);
+        });
+
+        product1.colors.forEach((colors1, index) => { 
+            theSameAttributes = theSameAttributes && compareAttributes(colors1.items, product2.colors[index].items);
+        });
+
+        return theSameAttributes;
     }
 };
 
@@ -56,11 +69,18 @@ const changeCartQuantity = (cartItems, idCart, quantity) => {
 }
 
 export const changeAttribute = (cartItem, selectedOption) => { 
-    const newValues = cartItem[selectedOption.name + 's'].map(option => { 
+    const findAttribute = cartItem[selectedOption.name + 's'].find(item => selectedOption.id === item.id);
+    const newValues = findAttribute.items.map(option => { 
         return option.id === selectedOption.value ? { ...option, selected: true } : { ...option, selected: false };
     });
 
-    return newValues;
+    return cartItem[selectedOption.name + 's'].map(item => { 
+        if (selectedOption.id === item.id) {
+            return {...item, items: newValues};
+        } else {
+            return item;
+        }
+    });
 }
 
 const changeCartOptions = (cartItems, idCart, selectedOption) => { 
@@ -89,13 +109,13 @@ export const changeItemQuantity = (cartItems, idCart, quantity) => {
 }
 
 export const changeCartItemColor = (cartItems, id, color) => {
-    const newCartItems = changeCartOptions(cartItems, id, { name: 'color', value: color });
+    const newCartItems = changeCartOptions(cartItems, id, { name: 'color', value: color.value, id: color.id });
     return createAction(CART_ACTION_TYPES.SET_CART_ITEMS, newCartItems);
 }
 
 
 export const changeCartItemSize = (cartItems, id, size) => {
-    const newCartItems = changeCartOptions(cartItems, id, { name: 'size', value: size });
+    const newCartItems = changeCartOptions(cartItems, id, { name: 'size', value: size.value, id: size.id });
     return createAction(CART_ACTION_TYPES.SET_CART_ITEMS, newCartItems);
 }
 

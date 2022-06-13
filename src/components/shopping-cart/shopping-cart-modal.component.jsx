@@ -7,7 +7,7 @@ import { ShoppingCartListDiv } from './shopping-cart.styled.component';
 
 class ShoppingCartModal extends React.Component {
     render() { 
-        const { modal, cartItems, currency } = this.props;
+        const { modal, cartItems, currency, onChange } = this.props;
         const total = this.props.total.toFixed(2);
 
         return (
@@ -20,7 +20,7 @@ class ShoppingCartModal extends React.Component {
                         <ShoppingCartListDiv modal={modal}>
                             {cartItems.map((item, index) => {
                                 const id = item.idCart;
-                                return <ShoppingCartItem key={id} {...item} currency={currency} modal={modal} onChange={this.props.onChange}/>
+                                return <ShoppingCartItem key={id} {...item} currency={currency} modal={modal} onChange={onChange}/>
                             })}
                         </ShoppingCartListDiv>
                         <div className='shopping-cart-total-modal'>
