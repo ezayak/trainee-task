@@ -46,14 +46,23 @@ class ProductCard extends React.Component {
                 <div className='product-card'>
                     <div className='product-container'>
                         <div
-                            className='product-image'
-                            style={{ 'backgroundImage': `url('${img}')`, 'backgroundSize': 'cover'}}
+                            className='product-image-container'
+                            style={{
+                                backgroundColor: 'var(--clr-white)',
+                                backgroundImage: `url(${img})`,
+                                backgroundSize: 'contain',
+                                backgroundRepeat: 'no-repeat',
+                                backgroundPosition: '50% 50%'
+                            }}
                         >
                             {
-                                !inStock &&  
-                                <div className='out-of-stock'>
-                                      { CONST_OUT_OF_STOCK }  
-                                </div>
+                                !inStock && 
+                                <>
+                                    <div className='out-of-stock'></div>
+                                    <div className='text-box-out-of-stock'>
+                                            { CONST_OUT_OF_STOCK }  
+                                    </div>
+                                </>
                             }
                         </div>
                         {
