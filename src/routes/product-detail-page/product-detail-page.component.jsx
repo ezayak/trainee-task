@@ -60,7 +60,7 @@ class ProductDetailPage extends React.Component {
         const { currentPicture, selectedPicture } = this.state;
         const item = this.state.item;
         const currency = this.state.currency;
-        const price = this.state.loading ? 0 : getPrice(currency, item.prices);
+        const price = this.state.loading ? 0 : getPrice(currency, item.prices).toFixed(2);
 
         return (
             <div className='main-content'>
