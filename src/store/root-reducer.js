@@ -4,5 +4,5 @@ import { currencyReducer } from './currency/currency.reducer';
 
 export const rootReducer = combineReducers({
     cartItems: cartReducer,
-    currency: currencyReducer
+    currency: currencyReducer,
 });

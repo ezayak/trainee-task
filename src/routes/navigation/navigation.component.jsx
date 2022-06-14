@@ -3,6 +3,7 @@ import logo from '../../assets/icons/logo.png';
 import cartIcon from '../../assets/icons/cart.png';
 import vaectortIcon from '../../assets/icons/vector.png';
 import React, { Fragment } from 'react';
+import PropTypes from 'prop-types';
 import { GroupLabel } from '../../components/navigation/group-label/group-label.component';
 import { Link, Outlet } from 'react-router-dom';
 import CurrencyMenu from '../../components/navigation/currency-menu/currency-menu.component';
@@ -13,7 +14,7 @@ import { getCategories } from '../../utils/apis/categories.api';
 import { getCurrencies } from '../../utils/apis/currency.api';
 import { setActiveCurrency } from '../../store/currency/currency.action';
 
-const mapStateToProps = (state) => selectCartQuantity;
+const mapStateToProps = () => selectCartQuantity;
 const mapDispatchToProps = {
     setActiveCurrency
 };
@@ -149,6 +150,12 @@ class Navigation extends React.Component {
             });
         }
     }
+}
+
+Navigation.propTypes = {
+    cartQuantity: PropTypes.number,
+    currency: PropTypes.any,
+    setActiveCurrency: PropTypes.func
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Navigation);

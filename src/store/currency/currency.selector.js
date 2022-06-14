@@ -1,8 +1,8 @@
-import { createSelector } from "@reduxjs/toolkit";
+import { createSelector } from '@reduxjs/toolkit';
 
 const selectCurrencyReducer = (state) => state.currency;
 
 export const selectCurrency = createSelector(
     selectCurrencyReducer,
-    (currencySlice) => { return {currency: currencySlice.currency}}
+    (currencySlice) => ({ currency: currencySlice.currency }),
 );

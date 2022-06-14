@@ -3,8 +3,9 @@ import React from "react";
 import { setActiveCurrency } from '../../../store/currency/currency.action';
 import { selectCurrency } from '../../../store/currency/currency.selector';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
-const mapStateToProps = (state) => selectCurrency;
+const mapStateToProps = () => selectCurrency;
 
 const mapDispatchToProps = {
     setActiveCurrency
@@ -17,7 +18,7 @@ class CurrencyMenu extends React.Component {
             currencies: this.props.currencies
         }
     }
-
+    
     render() { 
         const { currencies } = this.state;
 
@@ -43,6 +44,11 @@ class CurrencyMenu extends React.Component {
         });
         this.props.setActiveCurrency(findCurrency);
     }
+}
+
+CurrencyMenu.propTypes = {
+    currencies: PropTypes.array,
+    setActiveCurrency: PropTypes.func
 }
 
 export default connect(mapStateToProps , mapDispatchToProps)(CurrencyMenu);

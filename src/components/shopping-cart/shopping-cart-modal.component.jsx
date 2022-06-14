@@ -1,5 +1,6 @@
 import './shopping-cart.style.scss';
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { ShoppingCartItem } from './shopping-cart-item.component';
 import { ButtonCheckout } from '../common/styled/buttons.styled.component';
@@ -18,7 +19,7 @@ class ShoppingCartModal extends React.Component {
                             My bag,<span> { cartItems.length } items</span>
                         </div>
                         <ShoppingCartListDiv modal={modal}>
-                            {cartItems.map((item, index) => {
+                            {cartItems.map(item => {
                                 const id = item.idCart;
                                 return <ShoppingCartItem key={id} {...item} currency={currency} modal={modal} onChange={onChange}/>
                             })}
@@ -36,6 +37,14 @@ class ShoppingCartModal extends React.Component {
             </div>
         );
     }
+}
+
+ShoppingCartModal.propTypes = {
+    modal: PropTypes.bool,
+    cartItems: PropTypes.array,
+    currency: PropTypes.any,
+    onChange: PropTypes.func,
+    total: PropTypes.number
 }
 
 export default ShoppingCartModal;

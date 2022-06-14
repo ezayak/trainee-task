@@ -1,5 +1,6 @@
 import './group-label.style.scss';
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 class GroupLabel extends React.Component { 
@@ -21,6 +22,10 @@ class GroupLabel extends React.Component {
         );
     }
 
+}
+
+GroupLabel.propTypes = {
+    name: PropTypes.string
 }
 
 export { GroupLabel };

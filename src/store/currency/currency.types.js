@@ -1,3 +1,3 @@
 export const CURRENCY_TYPES = {
-    SET_CURRENCY: 'SET_CURRENCY'
+    SET_CURRENCY: 'SET_CURRENCY',
 };

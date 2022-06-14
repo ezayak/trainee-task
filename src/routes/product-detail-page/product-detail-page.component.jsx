@@ -1,5 +1,6 @@
 import './product-detail-page.style.scss';
 import React from 'react';
+import PropTypes from 'prop-types';
 import { getPrice } from '../../utils/common.utils';
 import { TitleDiv, BrandDiv, PriceDiv, ColorSizeSpan } from '../../components/shopping-cart/shopping-cart.styled.component';
 import { ProductColors } from '../../components/product-elements/product-colors.component';
@@ -11,7 +12,7 @@ import { changeAttribute, addItemToCart } from '../../store/cart/cart.action';
 import { selectCartItems } from '../../store/cart/cart.selector';
 import { CONST_OUT_OF_STOCK } from '../../utils/common.utils';
 
-const mapStateToProps = (state) => selectCartItems;
+const mapStateToProps = () => selectCartItems;
 const mapDispatchToProps = {
     addItemToCart
 };
@@ -27,7 +28,7 @@ class ProductDetailPage extends React.Component {
             selectedPicture: '',
             currentPicture: ''
         }
-    };
+    }
 
 
     loadInfo = (id) => {
@@ -44,7 +45,7 @@ class ProductDetailPage extends React.Component {
 
     componentDidMount() { 
         this.loadInfo(this.state.productId);
-    };
+    }
 
     componentDidUpdate() {
         if (this.props.currency.label !== this.state.currency.label) {
@@ -127,7 +128,7 @@ class ProductDetailPage extends React.Component {
         this.setState({currentPicture: event.target.src});
     }
 
-    showSelectedPicture = (event) => { 
+    showSelectedPicture = () => { 
         this.setState({currentPicture: ''});
     }
 
@@ -144,7 +145,7 @@ class ProductDetailPage extends React.Component {
     }
 
 
-    onChangeCartItem = (event, id, type, value, idCart) => {
+    onChangeCartItem = (event, id, type, value) => {
         switch (type) {
             case 'size': {
                 const newAttributes = changeAttribute(this.state.item, { name: 'size', value: value, id :id });
@@ -161,6 +162,14 @@ class ProductDetailPage extends React.Component {
         event.stopPropagation();
     }   
     
+}
+
+ProductDetailPage.propTypes = {
+    currency: PropTypes.any,
+    productId: PropTypes.string,
+    addItemToCart: PropTypes.func,
+    cartItems: PropTypes.array,
+    idCart: PropTypes.string
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductDetailPage);

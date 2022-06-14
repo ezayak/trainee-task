@@ -1,5 +1,6 @@
 import './shopping-cart.style.scss';
 import React, { Fragment } from "react";
+import PropTypes from 'prop-types';
 import { ShoppingCartItem } from './shopping-cart-item.component';
 import { ButtonCheckout } from '../common/styled/buttons.styled.component';
 import { ShoppingCartListDiv } from './shopping-cart.styled.component';
@@ -39,6 +40,15 @@ class ShoppingCartPage extends React.Component {
             </div>
         );
     }
+}
+
+ShoppingCartPage.propTypes = {
+    cartItems: PropTypes.array,
+    currency: PropTypes.any,
+    quantity: PropTypes.number,
+    onChange: PropTypes.func,
+    tax: PropTypes.number,
+    total: PropTypes.number
 }
 
 export default ShoppingCartPage;

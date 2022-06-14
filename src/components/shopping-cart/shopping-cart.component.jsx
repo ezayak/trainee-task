@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from 'prop-types';
 import ShoppingCartMoldal from './shopping-cart-modal.component';
 import ShoppingCartPage from './shopping-cart-page.component';
 import { selectCartItems } from '../../store/cart/cart.selector';
@@ -6,7 +7,7 @@ import { changeItemQuantity, changeCartItemColor, changeCartItemSize } from '../
 import { connect } from "react-redux";
 
 
-const mapStateToProps = (state) => selectCartItems;
+const mapStateToProps = () => selectCartItems;
 const mapDispatchToProps = {
     changeItemQuantity,
     changeCartItemColor,
@@ -38,6 +39,14 @@ class ShoppingCart extends React.Component {
         }
         event.stopPropagation();
     }
+}
+
+ShoppingCart.propTypes = {
+    modal: PropTypes.bool,
+    changeCartItemColor: PropTypes.func,
+    changeCartItemSize: PropTypes.func,
+    changeItemQuantity: PropTypes.func,
+    cartItems: PropTypes.array
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ShoppingCart);

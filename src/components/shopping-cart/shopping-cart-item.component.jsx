@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import leftArrow from '../../assets/icons/vector-left.png';
 import rightArrow from '../../assets/icons/vector-right.png';
 import { ProductSizes } from '../product-elements/product-sizes.component';
@@ -83,6 +84,21 @@ class ShoppingCartItem extends React.Component {
             this.setState({indexPicture: 0});
         }
     }
+}
+
+ShoppingCartItem.propTypes = {
+    currency: PropTypes.any,
+    prices: PropTypes.array,
+    sizes: PropTypes.array,
+    colors: PropTypes.array,
+    id: PropTypes.string,
+    brand: PropTypes.string,
+    modal: PropTypes.bool,
+    name: PropTypes.string,
+    idCart: PropTypes.string,
+    quantity: PropTypes.number,
+    images: PropTypes.array,
+    onChange: PropTypes.func
 }
 
 export { ShoppingCartItem };

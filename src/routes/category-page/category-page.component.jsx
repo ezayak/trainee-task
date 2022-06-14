@@ -1,5 +1,6 @@
 import './category-page.style.scss';
 import React from 'react';
+import PropTypes from 'prop-types';
 import ProductCard from '../../components/product-card/product-card.component';
 import Alert from '../../components/common/alert/alert.component';
 import { getProductListByCategory } from '../../utils/apis/products.api';
@@ -71,6 +72,10 @@ class CategoryPage extends React.Component {
     toggleAlert = () => { 
         this.setState({alertVisible: !this.state.alertVisible})
     }    
+}
+
+CategoryPage.propTypes = {
+    name: PropTypes.string
 }
 
 export default CategoryPage;

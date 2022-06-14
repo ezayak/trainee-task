@@ -1,5 +1,6 @@
 import './product-colors.style.scss';
 import React from 'react';
+import PropTypes from 'prop-types';
 import { ColorSizeSpan } from '../shopping-cart/shopping-cart.styled.component';
 import { ColorDiv, ButtonColorOutline } from '../common/styled/buttons.styled.component';
 
@@ -35,6 +36,13 @@ class ProductColors extends React.Component {
     changeColor = (event) => {
         this.props.onChange(event, this.props.colors.id, 'color', event.target.id, this.props.id);
     }
+}
+
+ProductColors.propTypes = {
+    colors: PropTypes.any,
+    modal: PropTypes.bool,
+    onChange: PropTypes.func,
+    id: PropTypes.string
 }
 
 export { ProductColors };

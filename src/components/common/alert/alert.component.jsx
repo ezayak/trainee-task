@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from 'prop-types';
 import './alert.style.scss';
 
 class Alert extends React.Component { 
@@ -6,10 +7,10 @@ class Alert extends React.Component {
         super(props);
 
         this.state = {
-            message: props.message,
+            message: props.message ? props.message : '',
             toggleAlert: props.toggleAlert
         }
-    };
+    }
 
     componentDidMount() { 
         this.timerId = setTimeout(() => { 
@@ -28,7 +29,13 @@ class Alert extends React.Component {
                 <div className="alert-message">{ message }</div>
             </div>
         );
-    };
+    }
+}
+
+Alert.propTypes = {
+    message: PropTypes.string,
+    timeOut: PropTypes.number,
+    toggleAlert: PropTypes.func
 }
 
 export default Alert;

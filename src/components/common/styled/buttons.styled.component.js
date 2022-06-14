@@ -30,8 +30,8 @@ const Button = styled.button`
 `;
 
 const ButtonSize = styled(Button)`
-    min-width: ${props => props.modal ? '24px' : '63px'};
-    height: ${props => props.modal ? '24px' : '45px'};
+    min-width: ${(props) => (props.modal ? '24px' : '63px')};
+    height: ${(props) => (props.modal ? '24px' : '45px')};
     font-family: 'Source Sans Pro';
     font-style: normal;
     text-transform: uppercase;
@@ -42,21 +42,21 @@ const ButtonSize = styled(Button)`
     border: 1px solid var(--clr-black);
     text-align: center;  
     margin-top: 8px;
-    background-color: ${props => props.selected ? 'var(--clr-black)' : 'var(--clr-white)'};
-    color: ${props => props.selected ? 'var(--clr-white)' : 'var(--clr-black)'};
+    background-color: ${(props) => (props.selected ? 'var(--clr-black)' : 'var(--clr-white)')};
+    color: ${(props) => (props.selected ? 'var(--clr-white)' : 'var(--clr-black)')};
 `;
 
 const ColorDiv = styled.div`
-    width: ${props => props.modal ? '16px' : '28px'};
-    height: ${props => props.modal ? '16px' : '28px'};
-    background-color: ${props => props.color || 'var(--clr-white)'};
+    width: ${(props) => (props.modal ? '16px' : '28px')};
+    height: ${(props) => (props.modal ? '16px' : '28px')};
+    background-color: ${(props) => props.color || 'var(--clr-white)'};
 `;
 
 const ButtonColorOutline = styled(Button)`
-    width: ${props => props.modal ? '20px' : '32px'};
-    height: ${props => props.modal ? '20px' : '32px'};
-    background-color: ${props => props.selected ?'var(--clr-white)' : props.color};
-    border: ${props => props && props.selected ? '1px solid var(--clr-green)' : props.color === '#FFFFFF' ? '1px solid var(--clr-black)' :'0px'};
+    width: ${(props) => (props.modal ? '20px' : '32px')};
+    height: ${(props) => (props.modal ? '20px' : '32px')};
+    background-color: ${(props) => (props.selected ? 'var(--clr-white)' : props.color)};
+    border: ${(props) => (props && props.selected ? '1px solid var(--clr-green)' : props.color === '#FFFFFF' ? '1px solid var(--clr-black)' : '0px')};
     padding: 0px;
     display: flex;
     justify-content: center;
@@ -65,10 +65,10 @@ const ButtonColorOutline = styled(Button)`
 
 const ButtonQuantity = styled(Button)`
     border: 1px solid var(--clr-black);
-    width: ${props => props.modal ? '24px' :'45px'};
-    height: ${props => props.modal ? '24px' :'45px'};
+    width: ${(props) => (props.modal ? '24px' : '45px')};
+    height: ${(props) => (props.modal ? '24px' : '45px')};
     font-weight: 400;
-    font-size: ${props => props.modal ? '20px' : '27px'};
+    font-size: ${(props) => (props.modal ? '20px' : '27px')};
     line-height: 160%;
 `;
 
@@ -76,8 +76,10 @@ const ButtonCheckout = styled(Button)`
     background: var(--clr-green);  
     color: var(--clr-white);
     border: 0;
-    width: ${props => props.modal ? '140px' : '279px'};
+    width: ${(props) => (props.modal ? '140px' : '279px')};
     height: 43px;
 `;
 
-export { ButtonSize, ButtonColorOutline, ColorDiv, ButtonQuantity, ButtonCheckout };
+export {
+    ButtonSize, ButtonColorOutline, ColorDiv, ButtonQuantity, ButtonCheckout,
+};

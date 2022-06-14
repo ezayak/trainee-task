@@ -6,8 +6,9 @@ import { CONST_OUT_OF_STOCK, getPrice } from '../../utils/common.utils';
 import { addItemToCart } from '../../store/cart/cart.action';
 import { selectCartItems } from '../../store/cart/cart.selector';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
-const mapStateToProps = (state) => selectCartItems;
+const mapStateToProps = () => selectCartItems;
 
 const mapDispatchToProps = {
     addItemToCart
@@ -25,7 +26,7 @@ class ProductCard extends React.Component {
             inStock: props.product.inStock,
             currency: props.currency
         };
-    };
+    }
 
     componentDidUpdate = () => {
         if (this.props.currency && this.props.currency.label !== this.state.currency.label) {
@@ -93,6 +94,14 @@ class ProductCard extends React.Component {
 
     }
 
+}
+
+ProductCard.propTypes = {
+    product: PropTypes.any,
+    currency: PropTypes.array,
+    addItemToCart: PropTypes.func,
+    cartItems: PropTypes.array,
+    onAddToCart: PropTypes.func
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductCard);
