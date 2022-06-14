@@ -56,7 +56,6 @@ class Navigation extends React.Component {
     };
 
     componentDidMount() {
-        console.log('Navigation componentDidMount');
         this.loadCategories();
         this.loadCurrencies();
     }

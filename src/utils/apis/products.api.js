@@ -61,7 +61,6 @@ const PRODUCT_INFO = `
 `;
 
 const getProductListByCategory = (categoryName) => { 
-    console.log('getProductListByCategory');
     return fetch('http://localhost:4000/graphql', {
         method: 'POST',
         body: JSON.stringify({
