@@ -33,7 +33,6 @@ class ProductSizes extends React.Component {
     }
 
     changeSize = (event) => {
-        console.log('event', event.target.id);
         this.props.onChange(event, this.props.sizes.id, 'size', event.target.id, this.props.id);
     }
 }

@@ -15,9 +15,6 @@ const compareAttributes = (attr1, attr2) => {
 };
 
 const isSameProduct = (product1, product2) => {
-    console.log('product1', product1);
-    console.log('product2', product2);
-
     if (product1.id !== product2.id) {
         return false;
     }

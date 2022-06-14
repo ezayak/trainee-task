@@ -98,7 +98,7 @@ class ProductCard extends React.Component {
 
 ProductCard.propTypes = {
     product: PropTypes.any,
-    currency: PropTypes.array,
+    currency: PropTypes.any,
     addItemToCart: PropTypes.func,
     cartItems: PropTypes.array,
     onAddToCart: PropTypes.func

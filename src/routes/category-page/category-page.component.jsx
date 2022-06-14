@@ -14,7 +14,8 @@ class CategoryPage extends React.Component {
             loading: true,
             alertVisible: false,
             message: '',
-            categoryName: props.name ? props.name : 'all'
+            categoryName: props.name ? props.name : 'all',
+            //loadProductsCount: 0
         };
     }
 
@@ -37,9 +38,9 @@ class CategoryPage extends React.Component {
 
     componentDidUpdate() {
         if (this.props.name !== this.state.categoryName && this.state.categoryName !== 'all') {
+            console.log('componentDidUpdate loadProducts');
             this.loadProducts(this.props.name ? this.props.name : 'all');
         }
-       
     }
 
     render() { 

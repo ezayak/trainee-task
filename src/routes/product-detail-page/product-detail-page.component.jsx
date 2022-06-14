@@ -62,8 +62,6 @@ class ProductDetailPage extends React.Component {
         const currency = this.state.currency;
         const price = this.state.loading ? 0 : getPrice(currency, item.prices);
 
-        console.log('item', item);
-
         return (
             <div className='main-content'>
                 {

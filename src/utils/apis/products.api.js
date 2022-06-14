@@ -60,25 +60,27 @@ const PRODUCT_INFO = `
     }
 `;
 
-const getProductListByCategory = (categoryName) => fetch('http://localhost:4000/graphql', {
-    method: 'POST',
-    body: JSON.stringify({
-        query: CATEGORY_PRODUCT_LIST,
-        variables: { input: { title: categoryName } },
-    }),
-    mode: 'cors',
-    headers: {
-        'Content-Type': 'application/json',
-    },
-})
-    .then((response) => response.json())
-    .then((data) => {
-        if (data.data !== null) {
-            return formatDataArray(data.data.category.products);
-        }
-        return [];
-    });
-
+const getProductListByCategory = (categoryName) => { 
+    console.log('getProductListByCategory');
+    return fetch('http://localhost:4000/graphql', {
+        method: 'POST',
+        body: JSON.stringify({
+            query: CATEGORY_PRODUCT_LIST,
+            variables: { input: { title: categoryName } },
+        }),
+        mode: 'cors',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    })
+        .then((response) => response.json())
+        .then((data) => {
+            if (data.data !== null) {
+                return formatDataArray(data.data.category.products);
+            }
+            return [];
+        });    
+}
 const getProductById = (id) => fetch('http://localhost:4000/graphql', {
     method: 'POST',
     body: JSON.stringify({
